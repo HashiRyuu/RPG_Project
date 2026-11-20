@@ -2,7 +2,12 @@
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 
-uri = "mongodb+srv://HaltingUltraman:Scoutuser2728%40@userscluster.iinvp.mongodb.net/?retryWrites=true&w=majority&appName=UsersCluster"
+import os
+
+# Configure this privately. Never commit database credentials to the repository.
+uri = os.environ.get("MONGODB_URI")
+if not uri:
+    raise RuntimeError("Set MONGODB_URI before running backend.py")
 
 # Create a new client and connect to the server
 client = MongoClient(uri)
